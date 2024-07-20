@@ -1,5 +1,4 @@
 import { GoogleGenerativeAI, HarmBlockThreshold, HarmCategory } from "@google/generative-ai";
-import Base64 from 'base64-js';
 import MarkdownIt from 'markdown-it';
 import { maybeShowApiKeyBanner } from './gemini-api-banner';
 import './style.css';
@@ -8,6 +7,8 @@ let API_KEY = 'AIzaSyCLTOiwEHTJpl_SScdmP2ZckCNX5Ci2TAQ'; // Ganti dengan API Key
 
 let form = document.querySelector('form');
 let promptInput = document.querySelector('input[name="prompt"]');
+let fileInput = document.querySelector('#fileInput');
+let dropZone = document.querySelector('.drop-zone');
 let output = document.querySelector('.output');
 
 const genAI = new GoogleGenerativeAI(API_KEY);
@@ -21,11 +22,10 @@ const model = genAI.getGenerativeModel({
   ],
 });
 
-
 const chat = model.startChat({
-  history:[],
-  generationConfig: { // Perbaiki typo 'generaionConfig' menjadi 'generationConfig'
-    maxOutputTokens:100
+  history: [],
+  generationConfig: {
+    maxOutputTokens: 100
   }
 });
 
@@ -35,11 +35,21 @@ form.onsubmit = async (ev) => {
 
   try {
     const prompt = promptInput.value;
+    let imageAnalysis = '';
 
-    // Call the multimodal model, and get a stream of results
-    const result = await chat.sendMessageStream(prompt);
+    if (fileInput.files.length > 0) {
+      const files = Array.from(fileInput.files);
+      for (const file of files) {
+        const base64Image = await toBase64(file);
+        const analysis = await analyzeImage(base64Image);
+        imageAnalysis += `File: ${file.name}\nAnalysis: ${analysis}\n\n`;
+      }
+    }
 
-    // Read from the stream and interpret the output as markdown
+    const combinedPrompt = `${prompt}\n\n${imageAnalysis}`;
+
+    const result = await chat.sendMessageStream(combinedPrompt);
+
     let buffer = [];
     let md = new MarkdownIt();
     for await (let response of result.stream) {
@@ -51,5 +61,57 @@ form.onsubmit = async (ev) => {
   }
 };
 
-// You can delete this once you've filled out an API key
+dropZone.addEventListener('paste', async (event) => {
+  const items = event.clipboardData.items;
+  for (const item of items) {
+    if (item.kind === 'file') {
+      const file = item.getAsFile();
+      const base64Image = await toBase64(file);
+      const analysis = await analyzeImage(base64Image);
+      output.innerHTML += `<p>Pasted Image Analysis: ${analysis}</p>`;
+    }
+  }
+});
+
+dropZone.addEventListener('drop', async (event) => {
+  event.preventDefault();
+  const files = event.dataTransfer.files;
+  for (const file of files) {
+    const base64Image = await toBase64(file);
+    const analysis = await analyzeImage(base64Image);
+    output.innerHTML += `<p>Dropped File Analysis: ${analysis}</p>`;
+  }
+});
+
+dropZone.addEventListener('dragover', (event) => {
+  event.preventDefault();
+});
+
+function toBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result.split(',')[1]);
+    reader.onerror = error => reject(error);
+  });
+}
+
+async function analyzeImage(base64Image) {
+  const response = await fetch('https://vision.googleapis.com/v1/images:annotate?key=' + API_KEY, {
+    method: 'POST',
+    body: JSON.stringify({
+      requests: [{
+        image: {
+          content: base64Image
+        },
+        features: [{
+          type: 'LABEL_DETECTION'
+        }]
+      }]
+    })
+  });
+  const result = await response.json();
+  return result.responses[0].labelAnnotations.map(annotation => annotation.description).join(', ');
+}
+
 maybeShowApiKeyBanner(API_KEY);

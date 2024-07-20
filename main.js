@@ -1,3 +1,4 @@
+
 import { GoogleGenerativeAI, HarmBlockThreshold, HarmCategory } from "@google/generative-ai";
 import MarkdownIt from 'markdown-it';
 import { maybeShowApiKeyBanner } from './gemini-api-banner';
@@ -56,6 +57,9 @@ form.onsubmit = async (ev) => {
       buffer.push(response.text());
       output.innerHTML = md.render(buffer.join(''));
     }
+
+    // Clear the input field after submission
+    promptInput.value = '';
   } catch (e) {
     output.innerHTML += '<hr>' + e;
   }

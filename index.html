@@ -14,10 +14,14 @@
 
     .container {
       display: grid;
-      grid-template-columns: 1fr 4fr;
+      grid-template-columns: 1fr 6fr;
       gap: 20px;
       padding: 20px;
       border-radius: 30px;
+    }
+    
+    .dark-mode .container{
+      width: 100%;
     }
 
     .history-container {
@@ -45,6 +49,11 @@
 
     .image-picker, .prompt-box, .output-container {
       margin-bottom: 20px;
+    }
+
+    .output-container{
+      margin-right: 200px;
+      
     }
 
     .image-picker {
@@ -93,6 +102,11 @@
       border: 1px solid #666666;
     }
 
+    #image-upload {
+      width: 70%;
+    }
+
+   
     .dark-mode .prompt-box button {
       background-color: #007bff;
       color: #ffffff;
@@ -105,7 +119,7 @@
     .dark-mode-button {
       position: absolute;
       top: 30px;
-      right: 20px;
+      right: 70px;
       background-color: #007bff;
       color: white;
       border: none;
@@ -130,11 +144,18 @@
       margin: 10px auto;
       text-align: center;
     }
+    .submit{
+      margin-right: 220px;
+      margin-left: 40px;
+    }
+    .perintah{
+      width: 100%;
+    }
   </style>
 </head>
 <body>
   <main>
-    <h1 class="judul">📈 Chatbot BPS Boyolali</h1>
+    <h1 class="judul">📈Chatbot BPS Boyolali</h1>
     <button class="dark-mode-button" id="dark-mode-toggle">☀</button>
     <div class="container">
       <div class="history-container">
@@ -152,9 +173,9 @@
           </div>
           <div class="prompt-box">
             <label>
-              <input name="prompt" placeholder="Masukkan Perintah anda" type="text">
+              <input name="prompt" class="perintah" placeholder="Masukkan Perintah anda" type="text">
             </label>
-            <button type="submit">▶</button>
+            <button type="submit" class="submit">▶</button>
           </div>
         </form>
         <div class="output-container">

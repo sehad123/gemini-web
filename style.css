@@ -8,9 +8,9 @@ body {
 
 main,
 .api-key-banner {
-  width: 100%;
+  width: 90%;
   padding: 24px;
-  max-width: 100%;
+  max-width: 90%;
   margin: 0 auto;
   border-radius: 20px;
 }

@@ -10,7 +10,7 @@ main,
 .api-key-banner {
   width: 100%;
   padding: 24px;
-  max-width: 660px;
+  max-width: 100%;
   margin: 0 auto;
   border-radius: 20px;
 }

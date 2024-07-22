@@ -47,6 +47,15 @@
       margin-bottom: 20px;
     }
 
+    .image-picker {
+      display: flex;
+      flex-direction: column;
+    }
+
+    #image-preview {
+      margin-top: 10px;
+    }
+
     #copy-button {
       display: none;
     }
@@ -108,11 +117,18 @@
     .dark-mode-button:hover {
       background-color: #0056b3;
     }
-   #history-list {
-    margin-bottom: 10px;
-    border-bottom: #000000;
-  
-  }
+
+    #history-list {
+      margin-bottom: 10px;
+      border-bottom: #000000;
+    }
+    
+    .judul {
+      font-size: 24px;
+      font-weight: bold;
+      margin: 10px auto;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
@@ -135,7 +151,7 @@
           </div>
           <div class="prompt-box">
             <label>
-              <input name="prompt" placeholder="Enter instructions or questions here" type="text">
+              <input name="prompt" placeholder="Masukkan Perintah anda" type="text">
             </label>
             <button type="submit">▶</button>
           </div>

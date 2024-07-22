@@ -19,12 +19,14 @@ let historyIndex = 0;
 
 imageUpload.onchange = () => {
   let file = imageUpload.files[0];
-  if (file) {
+  if (file && file.type.startsWith('image/')) {
     let reader = new FileReader();
     reader.onload = (e) => {
       imagePreview.innerHTML = `<img src="${e.target.result}" alt="Image preview" width="200">`;
     };
     reader.readAsDataURL(file);
+  } else {
+    imagePreview.innerHTML = '';
   }
 };
 
@@ -36,14 +38,24 @@ form.onsubmit = async (ev) => {
   try {
     let file = imageUpload.files[0];
     let imageBase64 = null;
+    let fileContent = '';
 
     if (file) {
-      imageBase64 = await new Promise((resolve, reject) => {
-        let reader = new FileReader();
-        reader.onload = () => resolve(reader.result.split(',')[1]);
-        reader.onerror = reject;
-        reader.readAsDataURL(file);
-      });
+      if (file.type.startsWith('image/')) {
+        imageBase64 = await new Promise((resolve, reject) => {
+          let reader = new FileReader();
+          reader.onload = () => resolve(reader.result.split(',')[1]);
+          reader.onerror = reject;
+          reader.readAsDataURL(file);
+        });
+      } else {
+        fileContent = await new Promise((resolve, reject) => {
+          let reader = new FileReader();
+          reader.onload = () => resolve(reader.result);
+          reader.onerror = reject;
+          reader.readAsText(file);
+        });
+      }
     }
 
     let contents = [
@@ -51,6 +63,7 @@ form.onsubmit = async (ev) => {
         role: 'user',
         parts: [
           imageBase64 ? { inline_data: { mime_type: file.type, data: imageBase64, } } : null,
+          fileContent ? { text: fileContent } : null,
           { text: promptInput.value }
         ].filter(Boolean)
       }

@@ -18,10 +18,11 @@
       gap: 20px;
       padding: 20px;
       border-radius: 30px;
+      
     }
     
-    .dark-mode .container{
-      width: 100%;
+    .dark-mode .container {
+      width: 95%;
     }
 
     .history-container {
@@ -35,9 +36,10 @@
     }
 
     .history-container li {
-      cursor: pointer;
-      padding: 5px 0;
-    }
+  cursor: pointer;
+  padding: 10px 0;
+  box-shadow: 0 4px 4px -2px rgba(0, 0, 0, 0.2); /* Horizontal, Vertical, Blur, Spread, Color */
+}
 
     .history-container li:hover {
       text-decoration: underline;
@@ -51,9 +53,8 @@
       margin-bottom: 20px;
     }
 
-    .output-container{
-      margin-right: 200px;
-      
+    .output-container {
+      margin-right: 100px;
     }
 
     .image-picker {
@@ -102,11 +103,11 @@
       border: 1px solid #666666;
     }
 
-    #image-upload {
-      width: 70%;
+    #image-upload, .perintah {
+      width: 100%;
+      box-sizing: border-box;
     }
 
-   
     .dark-mode .prompt-box button {
       background-color: #007bff;
       color: #ffffff;
@@ -134,22 +135,68 @@
 
     #history-list {
       margin: 15px 0;
-      padding:10px 0;
+      padding: 10px 0;
       border-bottom: #000000;
     }
-    
+
     .judul {
       font-size: 24px;
       font-weight: bold;
       margin: 10px auto;
       text-align: center;
     }
-    .submit{
-      margin-right: 220px;
-      margin-left: 40px;
+
+    .submit {
+      margin-left: 10px;
     }
-    .perintah{
-      width: 100%;
+
+    @media (max-width: 768px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+      .history-container {
+        border-right: none;
+      /* border-bottom: 3px solid #ccc; */
+      padding-right: 10px;
+    }
+      .output-container {
+        margin-right: 0;
+      }
+      
+      .dark-mode .container{
+        width: 90%;
+      }
+      .submit {
+        width: 15%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .dark-mode-button {
+        top: 10px;
+        right: 10px;
+      }
+      .dark-mode .container{
+        margin-left: -10px;
+      }
+      .judul {
+        font-size: 20px;
+      }
+      .perintah{
+        margin-left: -23px;
+        
+      }
+      #image-upload{
+        margin-left: -25px;
+      }
+      .submit {
+        width: 20%;
+        transform: translateX(-20px);
+      }
+      .output{
+        margin-left: -20px;
+      }
+      
     }
   </style>
 </head>
@@ -159,15 +206,15 @@
     <button class="dark-mode-button" id="dark-mode-toggle">☀</button>
     <div class="container">
       <div class="history-container">
-        <h2>History</h2>
+        <h2 class="history-judul">History</h2>
         <ul id="history-list"></ul>
       </div>
       <div class="chat-container">
         <form>
           <div class="image-picker">
             <label>
-              Upload Image:
-              <input type="file" accept="image/*" id="image-upload">
+              Upload File:
+              <input type="file" id="image-upload">
             </label>
             <div id="image-preview"></div>
           </div>

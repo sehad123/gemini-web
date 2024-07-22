@@ -1,5 +1,4 @@
 import { GoogleGenerativeAI, HarmBlockThreshold, HarmCategory } from "@google/generative-ai";
-import Base64 from 'base64-js';
 import MarkdownIt from 'markdown-it';
 import { maybeShowApiKeyBanner } from './gemini-api-banner';
 import './style.css';
@@ -12,6 +11,11 @@ let output = document.querySelector('.output');
 let imageUpload = document.getElementById('image-upload');
 let imagePreview = document.getElementById('image-preview');
 let copyButton = document.getElementById('copy-button');
+let historyList = document.getElementById('history-list');
+let darkModeToggle = document.getElementById('dark-mode-toggle');
+
+let history = [];
+let historyIndex = 0;
 
 imageUpload.onchange = () => {
   let file = imageUpload.files[0];
@@ -64,6 +68,7 @@ form.onsubmit = async (ev) => {
     });
 
     // Clear the input fields after submission
+    let userPrompt = promptInput.value;
     promptInput.value = '';
     imageUpload.value = '';
     imagePreview.innerHTML = '';
@@ -79,10 +84,33 @@ form.onsubmit = async (ev) => {
 
     // Show the copy button after output is generated
     copyButton.style.display = 'block';
+
+    // Save history
+    let historyItem = {
+      id: historyIndex++,
+      prompt: userPrompt,
+      output: buffer.join('')
+    };
+    history.push(historyItem);
+    updateHistoryList();
+
   } catch (e) {
     output.innerHTML += '<hr>' + e;
   }
 };
+
+function updateHistoryList() {
+  historyList.innerHTML = '';
+  history.forEach(item => {
+    let listItem = document.createElement('li');
+    listItem.textContent = item.prompt;
+    listItem.onclick = () => {
+      output.innerHTML = new MarkdownIt().render(item.output);
+      copyButton.style.display = 'block';
+    };
+    historyList.appendChild(listItem);
+  });
+}
 
 copyButton.onclick = () => {
   let textToCopy = output.innerText;
@@ -93,6 +121,10 @@ copyButton.onclick = () => {
     .catch(err => {
       console.error('Failed to copy: ', err);
     });
+};
+
+darkModeToggle.onclick = () => {
+  document.body.classList.toggle('dark-mode');
 };
 
 maybeShowApiKeyBanner(API_KEY);

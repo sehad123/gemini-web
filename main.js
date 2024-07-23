@@ -141,3 +141,44 @@ darkModeToggle.onclick = () => {
 };
 
 maybeShowApiKeyBanner(API_KEY);
+
+window.selectOption = function(option) {
+  output.textContent = 'Generating...';
+  copyButton.style.display = 'none';
+  setTimeout(() => {
+    let answer = '';
+    switch(option) {
+      case 'Dimana Lokasi BPS Boyolali':
+        answer = 'Lokasi BPS Boyolali berada di Jl. Pandanaran No.234, Boyolali, Jawa Tengah.';
+        break;
+      case 'Apa saja tugas dan fungsi BPS Boyolali?':
+        answer = 'Tugas dan fungsi BPS Boyolali meliputi penyediaan data statistik untuk pemerintah dan masyarakat, melakukan survei dan sensus, serta analisis data statistik.';
+        break;
+      case 'Bagaimana cara mendapatkan data statistik dari BPS Boyolali?':
+        answer = 'Data statistik dari BPS Boyolali dapat diperoleh melalui situs resmi BPS, datang langsung ke kantor BPS Boyolali, atau melalui permintaan data secara tertulis.';
+        break;
+      case 'Apa saja program unggulan BPS Boyolali?':
+        answer = 'Program unggulan BPS Boyolali termasuk sensus penduduk, survei sosial ekonomi, dan publikasi statistik daerah.';
+        break;
+      case 'Berapa angka inflasi Boyolali':
+        answer = 'Angka inflasi Boyolali saat ini adalah sekitar 3.5% per tahun, berdasarkan data terakhir yang tersedia.';
+        break;
+      case 'Berapa angka kemiskinan Boyolali':
+        answer = 'Angka kemiskinan Boyolali saat ini adalah sekitar 10.2%, menurut survei terbaru dari BPS.';
+        break;
+      default:
+        answer = 'Opsi tidak dikenal.';
+    }
+    output.textContent = answer;
+    copyButton.style.display = 'block';
+
+    // Save to history
+    let historyItem = {
+      id: historyIndex++,
+      prompt: option,
+      output: answer
+    };
+    history.push(historyItem);
+    updateHistoryList();
+  }, 2000);
+}

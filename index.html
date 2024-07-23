@@ -18,9 +18,8 @@
       gap: 20px;
       padding: 20px;
       border-radius: 30px;
-      
     }
-    
+
     .dark-mode .container {
       width: 95%;
     }
@@ -36,10 +35,10 @@
     }
 
     .history-container li {
-  cursor: pointer;
-  padding: 10px 0;
-  box-shadow: 0 4px 4px -2px rgba(0, 0, 0, 0.2); /* Horizontal, Vertical, Blur, Spread, Color */
-}
+      cursor: pointer;
+      padding: 10px 0;
+      box-shadow: 0 4px 4px -2px rgba(0, 0, 0, 0.2); /* Horizontal, Vertical, Blur, Spread, Color */
+    }
 
     .history-container li:hover {
       text-decoration: underline;
@@ -55,6 +54,7 @@
 
     .output-container {
       margin-right: 100px;
+      word-wrap: break-word;
     }
 
     .image-picker {
@@ -101,9 +101,6 @@
       background-color: #444444;
       color: #ffffff;
       border: 1px solid #666666;
-    }
-
-    #image-upload, .perintah {
       width: 100%;
       box-sizing: border-box;
     }
@@ -149,6 +146,14 @@
     .submit {
       margin-left: 10px;
     }
+    .chat-container{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .option-button{
+        margin:10px;
+      }
 
     @media (max-width: 768px) {
       .container {
@@ -156,18 +161,24 @@
       }
       .history-container {
         border-right: none;
-      /* border-bottom: 3px solid #ccc; */
-      padding-right: 10px;
-    }
+        padding-right: 10px;
+      }
       .output-container {
         margin-right: 0;
       }
-      
-      .dark-mode .container{
+      .dark-mode .container {
         width: 90%;
       }
       .submit {
         width: 15%;
+      }
+      .chat-container{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .option-button{
+        margin:10px;
       }
     }
 
@@ -176,33 +187,39 @@
         top: 10px;
         right: 10px;
       }
-      .dark-mode .container{
+      .dark-mode .container {
         margin-left: -10px;
       }
       .judul {
         font-size: 20px;
       }
-      .perintah{
+      .perintah {
         margin-left: -23px;
-        
       }
-      #image-upload{
+      #image-upload {
         margin-left: -25px;
       }
       .submit {
         width: 20%;
         transform: translateX(-20px);
       }
-      .output{
+      .output {
         margin-left: -20px;
       }
-      
+      .chat-container{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .option-button{
+        margin:10px;
+      }
     }
   </style>
 </head>
 <body>
   <main>
-    <h1 class="judul">📈Chatbot BPS Boyolali</h1>
+    <h1 class="judul">Chatbot BPS Boyolali</h1>
     <button class="dark-mode-button" id="dark-mode-toggle">☀</button>
     <div class="container">
       <div class="history-container">
@@ -210,6 +227,14 @@
         <ul id="history-list"></ul>
       </div>
       <div class="chat-container">
+        <div class="button-container">
+          <button class="option-button" onclick="selectOption('Dimana Lokasi BPS Boyolali')">Dimana Lokasi BPS Boyolali</button>
+          <button class="option-button" onclick="selectOption('Apa saja tugas dan fungsi BPS Boyolali?')">Apa saja tugas dan fungsi BPS Boyolali?</button>
+          <button class="option-button" onclick="selectOption('Bagaimana cara mendapatkan data statistik dari BPS Boyolali?')">Bagaimana cara mendapatkan data statistik dari BPS Boyolali?</button>
+          <button class="option-button" onclick="selectOption('Apa saja program unggulan BPS Boyolali?')">Apa saja program unggulan BPS Boyolali?</button>
+          <button class="option-button" onclick="selectOption('Berapa angka inflasi Boyolali')">Berapa angka inflasi Boyolali</button>
+          <button class="option-button" onclick="selectOption('Berapa angka kemiskinan Boyolali')">Berapa angka kemiskinan Boyolali</button>
+        </div>
         <form>
           <div class="image-picker">
             <label>
@@ -234,4 +259,6 @@
   </main>
   <script type="module" src="/main.js"></script>
 </body>
+
+
 </html>

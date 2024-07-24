@@ -21,13 +21,20 @@
     }
 
     .dark-mode .container {
-      width: 95%;
+      width: 100%;
+      margin-left: -20px;
     }
 
     .history-container {
       border-right: 4px solid #ccc;
       padding-right: 10px;
+      margin-left: -30px;
     }
+    .dark-mode .history-container{
+      margin-left: -10px;
+      padding-right: 10px;
+    }
+
 
     .history-container ul {
       list-style: none;
@@ -37,6 +44,7 @@
     .history-container li {
       cursor: pointer;
       padding: 10px 0;
+      margin-bottom: 10px;
       box-shadow: 0 4px 4px -2px rgba(0, 0, 0, 0.2); /* Horizontal, Vertical, Blur, Spread, Color */
     }
 
@@ -139,6 +147,7 @@
     .judul {
       font-size: 24px;
       font-weight: bold;
+      transform: translateY(-25px);
       margin: 10px auto;
       text-align: center;
     }
@@ -146,39 +155,48 @@
     .submit {
       margin-left: 10px;
     }
-    .chat-container{
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-      }
-      .option-button{
-        margin:10px;
-      }
+
+    .chat-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .option-button {
+      margin: 10px;
+      font-size: 14px;
+    }
 
     @media (max-width: 768px) {
       .container {
         grid-template-columns: 1fr;
       }
+
       .history-container {
         border-right: none;
         padding-right: 10px;
       }
+
       .output-container {
         margin-right: 0;
       }
+
       .dark-mode .container {
         width: 90%;
       }
+
       .submit {
         width: 15%;
       }
-      .chat-container{
+
+      .chat-container {
         display: flex;
         flex-direction: column;
         gap: 10px;
       }
-      .option-button{
-        margin:10px;
+
+      .option-button {
+        margin: 10px;
       }
     }
 
@@ -187,36 +205,90 @@
         top: 10px;
         right: 10px;
       }
+      .judul{
+        margin-left: -60px;0px;
+      }
+     .dark-mode .history-container li {
+      transform: translateX(20px);
+     }
+     .dark-mode .history-judul{
+      transform: translateX(20px);
+     }
+      .output-container{
+        transform: translateX(25px);
+      }
+    
+      .chat-container{
+        transform: translateY(-10px);
+
+      }
+      .history-container{
+        transform: translateY(-70px);
+
+      }
       .dark-mode .container {
         margin-left: -10px;
       }
+
       .judul {
-        font-size: 20px;
+        font-size: 24px;
+        transform: translateY(-45px);
       }
+
       .perintah {
-        margin-left: -23px;
+        margin-right: 10px;
       }
-      #image-upload {
-        margin-left: -25px;
+      #upload-image{
+        margin-left: -20px;
       }
+
+     
+      .dark-mode .perintah{
+        transform: translateX(5px);
+
+      }
+      .dark-mode #image-upload{
+        transform: translateX(5px);
+        width: 300px;
+      }
+
       .submit {
         width: 20%;
         transform: translateX(-20px);
       }
+
       .output {
         margin-left: -20px;
       }
-      .chat-container{
+
+      .chat-container {
         display: flex;
         flex-direction: column;
         gap: 10px;
         margin-left: -50px;
       }
-      .button-container{
+
+      .button-container {
         margin-left: -20px;
       }
-      .option-button{
-        margin:10px;
+.dark-mode .option-button{
+transform: translateX(25px);
+}
+.dark-mode label{
+  margin-left: 20px;
+}
+      .option-button {
+        margin: 10px;
+      }
+    }
+     /* Penyesuaian untuk tampilan desktop */
+     @media (min-width: 769px) {
+      .history-container.hidden + .chat-container {
+        grid-column: span 2;
+      }
+      .history-container.hidden ~ .chat-container .image-picker,
+      .history-container.hidden ~ .chat-container .prompt-box {
+        grid-column: span 2;
       }
     }
   </style>
@@ -262,7 +334,6 @@
     </div>
   </main>
   <script type="module" src="/main.js"></script>
+
 </body>
-
-
 </html>

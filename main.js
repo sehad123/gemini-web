@@ -13,6 +13,9 @@ let imagePreview = document.getElementById('image-preview');
 let copyButton = document.getElementById('copy-button');
 let historyList = document.getElementById('history-list');
 let darkModeToggle = document.getElementById('dark-mode-toggle');
+let historyJudul = document.querySelector('.history-judul');
+let historyContainer = document.querySelector('.history-container');
+let chatContainer = document.querySelector('.chat-container');
 
 let history = [];
 let historyIndex = 0;
@@ -123,7 +126,19 @@ function updateHistoryList() {
     };
     historyList.appendChild(listItem);
   });
+
+  historyContainer.style.display = history.length > 0 ? 'block' : 'none';
+  historyJudul.style.display = history.length > 0 ? 'block' : 'none';
+
+  if (history.length === 0) {
+    historyContainer.classList.add('hidden');
+    chatContainer.classList.add('expanded');
+  } else {
+    historyContainer.classList.remove('hidden');
+    chatContainer.classList.remove('expanded');
+  }
 }
+updateHistoryList();
 
 copyButton.onclick = () => {
   let textToCopy = output.innerText;
@@ -182,3 +197,5 @@ window.selectOption = function(option) {
     updateHistoryList();
   }, 2000);
 }
+
+updateHistoryList();

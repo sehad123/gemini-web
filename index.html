@@ -47,6 +47,10 @@
       box-shadow: 0 4px 4px -2px rgba(0, 0, 0, 0.2); /* Horizontal, Vertical, Blur, Spread, Color */
     }
 
+    .dark-mode .history-container li{
+          box-shadow: 0 4px 4px -2px rgba(255, 255, 255, 0.5); /* Horizontal, Vertical, Blur, Spread, Color */
+
+    }
     .history-container li:hover {
       text-decoration: underline;
     }
@@ -153,6 +157,9 @@
       padding: 10px 0;
       border-bottom: #000000;
     }
+    .history-judul{
+      margin-left: 30px;
+    }
 
     .judul {
       font-size: 24px;
@@ -237,9 +244,9 @@
         transform: translateX(20px);
       }
 
-      .dark-mode .history-judul {
-        transform: translateX(20px);
-      }
+      .history-judul{
+      margin-left: 100px;
+    }
 
       .output-container {
         transform: translateX(25px);
@@ -287,6 +294,9 @@
 
       .output {
         margin-left: -20px;
+      }
+      .dark-mode .output{
+        margin-left: 20px;
       }
 
       .chat-container {

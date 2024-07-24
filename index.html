@@ -30,11 +30,10 @@
       padding-right: 10px;
       margin-left: -30px;
     }
-    .dark-mode .history-container{
+    .dark-mode .history-container {
       margin-left: -10px;
       padding-right: 10px;
     }
-
 
     .history-container ul {
       list-style: none;
@@ -116,10 +115,21 @@
     .dark-mode .prompt-box button {
       background-color: #007bff;
       color: #ffffff;
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
     }
 
     .dark-mode .prompt-box button:hover {
       background-color: #0056b3;
+    }
+
+    .dark-mode .image-picker input {
+      background-color: #444444;
+      color: #ffffff;
+      border: 1px solid #666666;
     }
 
     .dark-mode-button {
@@ -177,15 +187,14 @@
         padding-right: 10px;
       }
 
-      
-.dark-mode #image-upload {
-  width: 100%;
-  max-width: 230px; /* Atur lebar maksimal untuk tampilan desktop */
-}
+      .dark-mode #image-upload {
+        width: 100%;
+        max-width: 230px; /* Atur lebar maksimal untuk tampilan desktop */
+      }
 
-.dark-mode .submit{
-  transform: translateX(2px);
-}
+      .dark-mode .submit {
+        transform: translateX(2px);
+      }
 
       .output-container {
         margin-right: 0;
@@ -215,35 +224,38 @@
         top: 10px;
         right: 10px;
       }
-    
 
-      .judul{
+      .judul {
         margin-left: -60px;
       }
-      .dark-mode .button-container{
+
+      .dark-mode .button-container {
         transform: translateX(30px);
       }
-     .dark-mode .history-container li {
-      transform: translateX(20px);
-     }
-     .dark-mode .history-judul{
-      transform: translateX(20px);
-     }
-      .output-container{
+
+      .dark-mode .history-container li {
+        transform: translateX(20px);
+      }
+
+      .dark-mode .history-judul {
+        transform: translateX(20px);
+      }
+
+      .output-container {
         transform: translateX(25px);
       }
-    
-      .chat-container{
+
+      .chat-container {
         transform: translateY(-10px);
         width: 90%;
-
       }
-     .dark-mode .image-picker{
-      width: 10%;
-     }
-      .history-container{
-        transform: translateY(-70px);
 
+      .dark-mode .image-picker {
+        width: 10%;
+      }
+
+      .history-container {
+        transform: translateY(-70px);
       }
 
       .judul {
@@ -254,16 +266,16 @@
       .perintah {
         margin-right: 10px;
       }
-      #upload-image{
+
+      #upload-image {
         margin-left: -20px;
       }
 
-     
-      .dark-mode .perintah{
+      .dark-mode .perintah {
         transform: translateX(5px);
-
       }
-      .dark-mode #image-upload{
+
+      .dark-mode #image-upload {
         transform: translateX(5px);
         width: 300px;
       }
@@ -285,23 +297,28 @@
       }
 
       .button-container {
-        margin-left: 15px;
+        margin-left: 10px;
       }
-      .dark-mode .button-container{
+
+      .dark-mode .button-container {
         margin-left: -30px;
       }
-.dark-mode .option-button{
-transform: translateX(25px);
-}
-.dark-mode label{
-  margin-left: 20px;
-}
+
+      .dark-mode .option-button {
+        transform: translateX(25px);
+      }
+
+      .dark-mode label {
+        margin-left: 20px;
+      }
+
       .option-button {
         margin: 10px;
       }
     }
-     /* Penyesuaian untuk tampilan desktop */
-     @media (min-width: 769px) {
+
+    /* Penyesuaian untuk tampilan desktop */
+    @media (min-width: 769px) {
       .history-container.hidden + .chat-container {
         grid-column: span 2;
       }
@@ -353,6 +370,5 @@ transform: translateX(25px);
     </div>
   </main>
   <script type="module" src="/main.js"></script>
-
 </body>
 </html>

@@ -177,6 +177,16 @@
         padding-right: 10px;
       }
 
+      
+.dark-mode #image-upload {
+  width: 100%;
+  max-width: 230px; /* Atur lebar maksimal untuk tampilan desktop */
+}
+
+.dark-mode .submit{
+  transform: translateX(2px);
+}
+
       .output-container {
         margin-right: 0;
       }
@@ -205,8 +215,13 @@
         top: 10px;
         right: 10px;
       }
+    
+
       .judul{
-        margin-left: -60px;0px;
+        margin-left: -60px;
+      }
+      .dark-mode .button-container{
+        transform: translateX(30px);
       }
      .dark-mode .history-container li {
       transform: translateX(20px);
@@ -220,14 +235,15 @@
     
       .chat-container{
         transform: translateY(-10px);
+        width: 90%;
 
       }
+     .dark-mode .image-picker{
+      width: 10%;
+     }
       .history-container{
         transform: translateY(-70px);
 
-      }
-      .dark-mode .container {
-        margin-left: -10px;
       }
 
       .judul {
@@ -265,11 +281,14 @@
         display: flex;
         flex-direction: column;
         gap: 10px;
-        margin-left: -50px;
+        margin-left: -40px;
       }
 
       .button-container {
-        margin-left: -20px;
+        margin-left: 50px;
+      }
+      .dark-mode .button-container{
+        margin-left: -30px;
       }
 .dark-mode .option-button{
 transform: translateX(25px);
